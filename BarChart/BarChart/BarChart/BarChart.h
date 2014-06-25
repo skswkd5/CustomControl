@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class BarChartBar;
+@class BarChartGrid;
+
 @interface BarChart : UIView
+{
+    BarChartGrid *bcGrid;
+}
+
+@property (assign, nonatomic) NSInteger yTitleWidth;
+@property (assign, nonatomic) NSInteger xTitleHeight;
+@property (assign, nonatomic) NSInteger yLabelWidth;
+@property (assign, nonatomic) NSInteger XLabelHeight;
 
 @end

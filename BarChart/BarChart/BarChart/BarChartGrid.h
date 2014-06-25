@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BarChartGrid : UIControl
+@interface BarChartGrid : UIView
+
+
 
 @end
