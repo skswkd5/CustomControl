@@ -21,10 +21,11 @@
 
 + (BCCoreData *)sharedInstance;
 
-- (void)initializeChartData;
+- (void)cleanUpCoreData;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)initializeChartData;
 @end
 
 

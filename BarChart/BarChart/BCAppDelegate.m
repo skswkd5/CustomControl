@@ -7,18 +7,12 @@
 //
 
 #import "BCAppDelegate.h"
-#import "BCCoreData.h"
 
 @implementation BCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-//    _bcCoreData = [[BCCoreData alloc] init];
-//    self.managedObjectContext = _bcCoreData.managedObjectContext;
-    BCCoreData *bcCoreData = [[BCCoreData alloc] init];
-    [bcCoreData initializeChartData];
-    
     return YES;
 }
 							

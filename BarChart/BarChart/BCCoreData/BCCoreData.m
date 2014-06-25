@@ -7,18 +7,14 @@
 //
 
 #import "BCCoreData.h"
-
-static NSString *RESOURCE_URL = @"BarChart";
-static NSString *SQLITE_FILE_NAME = @"BarChartData.sqlite";
-
-static NSString *ENTITY_PRODUCT = @"Product";
-static NSString *ENTITY_SALES = @"Sales";
+#import "Utility.h"
 
 @implementation BCCoreData
 
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 
 #pragma mark - CoreData
 + (BCCoreData *)sharedInstance
@@ -41,34 +37,31 @@ static NSString *ENTITY_SALES = @"Sales";
         [self managedObjectContext];
         [self managedObjectModel];
         [self persistentStoreCoordinator];
+
     }
     return self;
 }
 
 #pragma mark - initializingChartData
-- (void)initializeChartData
-{
-    [self saveProductData];
-    
-}
-
 - (void)saveProductData
 {
-    NSArray *displayName = @[@"챗온", @"카카오톡", @"페이스북", @"트위터", @"인스타그램", @"마플", @"밴드", @"라인"];
+    NSArray *displayName = @[@"ChatOn", @"KaKaoTalk", @"FaceBook", @"Twitter", @"Instagram", @"MyPeople", @"Band", @"Line"];
+    //@[@"챗온", @"카카오톡", @"페이스북", @"트위터", @"인스타그램", @"마플", @"밴드", @"라인"];
     NSArray *modelName = @[@"ChatOn", @"KaKaoTalk", @"FaceBook", @"Twitter", @"Instagram", @"MyPeople", @"Band", @"Line"];
-   
-    for(int i = 0; i < 1; i++)
-    {
-        NSManagedObject *contact = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_PRODUCT
-                                                                 inManagedObjectContext:self.managedObjectContext];
-        
-        [contact setValue:[displayName objectAtIndex:i] forKey:@"displayName"];
-        [contact setValue:[modelName objectAtIndex:i] forKey:@"model"];
-        [contact setValue:[NSDate date] forKey:@"releaseDate"];
-//        [contact setValue:[self returnInitialSalesData] forKey:@"sales"];
-        
-        [self saveContext];
-    }
+    
+//    Product *dataProduct = nil;
+//    
+//    for(int i = 0; i < displayName.count; i++)
+//    {
+//        dataProduct = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_PRODUCT
+//                                                    inManagedObjectContext:self.managedObjectContext];
+//        dataProduct.displayName = displayName[i];// [displayName objectAtIndex:i];
+//        dataProduct.model = modelName[i];
+//        dataProduct.releaseDate = [NSDate date];
+//      
+//        [self saveContext];
+//    }
+    
 }
 
 - (NSSet *)returnInitialSalesData
@@ -76,7 +69,7 @@ static NSString *ENTITY_SALES = @"Sales";
     NSMutableArray *arrReturn = [[NSMutableArray alloc] init];
     
     NSInteger maxCount = random() % 500;
-
+    
     for(int i=0; i< maxCount; i++)
     {
         NSInteger count = random() % 1000;
@@ -106,6 +99,7 @@ static NSString *ENTITY_SALES = @"Sales";
     
 }
 
+
 #pragma mark -bcCoreData
 -(void)saveContext
 {
@@ -121,7 +115,31 @@ static NSString *ENTITY_SALES = @"Sales";
             NSLog(@"Unresolved error : %@, %@", error, [error userInfo]);
             abort();
         }
+        else
+        {
+            NSLog(@"saveContext : Save Context Has Changes %@", [managedObjectContext userInfo]);
+        }
     }
+}
+
+- (void)cleanUpCoreData
+{
+    
+    NSError *error = nil;
+    NSArray *stores = [_persistentStoreCoordinator persistentStores];
+    
+    for (NSPersistentStore *store in stores)
+    {
+        [_persistentStoreCoordinator removePersistentStore:store error:&error];
+        [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:&error];
+    }
+    
+    NSLog(@"Core Data, Clean up... error : %@", error);
+    
+    [self managedObjectContext];
+    [self managedObjectModel];
+    [self persistentStoreCoordinator];
+    
 }
 
 -(NSURL *)applicationDocumentsDirectory
@@ -179,9 +197,6 @@ static NSString *ENTITY_SALES = @"Sales";
     
      NSManagedObjectModel *mom = [self managedObjectModel];
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    
-//    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
-//                                   initWithManagedObjectModel:[self managedObjectModel]];
     
     NSError *error = nil;
     NSURL *documentsDirectory =[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];

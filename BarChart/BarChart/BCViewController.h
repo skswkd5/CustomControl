@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BCCoreData.h"
+#import "BCDataHelper.h"
+#import "BCCoreDataHandler.h"
 
-@interface BCViewController : UIViewController
+@interface BCViewController : UIViewController<NSFetchedResultsControllerDelegate>
 
-@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, assign) NSUInteger selectYear;
+@property (nonatomic, strong) NSMutableArray *arraySalesCount;
 
 @end
