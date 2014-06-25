@@ -16,5 +16,4 @@ static NSString *CACHE_FILE_NAME = @"BarChart.cache";
 static NSString *ENTITY_PRODUCT = @"Product";
 static NSString *ENTITY_SALES = @"Sales";
 
-
 #endif

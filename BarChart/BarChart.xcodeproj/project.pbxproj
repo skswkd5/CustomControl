@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A30ACCE8195AA9B40058C3BD /* BCCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCE3195AA9B40058C3BD /* BCCoreData.m */; };
-		A30ACCEA195AA9B40058C3BD /* BCDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCE7195AA9B40058C3BD /* BCDataHelper.m */; };
-		A30ACCEF195AA9E30058C3BD /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCEC195AA9E30058C3BD /* Product.m */; };
-		A30ACCF0195AA9E30058C3BD /* Sales.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCEE195AA9E30058C3BD /* Sales.m */; };
+		A30ACCF5195AAB890058C3BD /* BCCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCF2195AAB890058C3BD /* BCCoreData.m */; };
+		A30ACCF6195AAB890058C3BD /* BCDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCF4195AAB890058C3BD /* BCDataHelper.m */; };
+		A30ACCFD195AAB9D0058C3BD /* BarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCF8195AAB9D0058C3BD /* BarChart.m */; };
+		A30ACCFE195AAB9D0058C3BD /* BarChartBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCFA195AAB9D0058C3BD /* BarChartBar.m */; };
+		A30ACCFF195AAB9D0058C3BD /* BarChartGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACCFC195AAB9D0058C3BD /* BarChartGrid.m */; };
+		A30ACD0A195AAC030058C3BD /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACD07195AAC030058C3BD /* Product.m */; };
+		A30ACD0B195AAC030058C3BD /* Sales.m in Sources */ = {isa = PBXBuildFile; fileRef = A30ACD09195AAC030058C3BD /* Sales.m */; };
 		A32A0ED31959203300287B2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A32A0ED21959203300287B2E /* Foundation.framework */; };
 		A32A0ED51959203300287B2E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A32A0ED41959203300287B2E /* CoreGraphics.framework */; };
 		A32A0ED71959203300287B2E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A32A0ED61959203300287B2E /* UIKit.framework */; };
@@ -40,15 +43,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A30ACCCE195A640A0058C3BD /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
-		A30ACCE2195AA9B40058C3BD /* BCCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCoreData.h; sourceTree = "<group>"; };
-		A30ACCE3195AA9B40058C3BD /* BCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCoreData.m; sourceTree = "<group>"; };
-		A30ACCE6195AA9B40058C3BD /* BCDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCDataHelper.h; sourceTree = "<group>"; };
-		A30ACCE7195AA9B40058C3BD /* BCDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCDataHelper.m; sourceTree = "<group>"; };
-		A30ACCEB195AA9E30058C3BD /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Product.h; path = BarChartData/Product.h; sourceTree = "<group>"; };
-		A30ACCEC195AA9E30058C3BD /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Product.m; path = BarChartData/Product.m; sourceTree = "<group>"; };
-		A30ACCED195AA9E30058C3BD /* Sales.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sales.h; path = BarChartData/Sales.h; sourceTree = "<group>"; };
-		A30ACCEE195AA9E30058C3BD /* Sales.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sales.m; path = BarChartData/Sales.m; sourceTree = "<group>"; };
+		A30ACCD3195A9D9F0058C3BD /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		A30ACCF1195AAB890058C3BD /* BCCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCCoreData.h; path = BCCoreData/BCCoreData.h; sourceTree = "<group>"; };
+		A30ACCF2195AAB890058C3BD /* BCCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCCoreData.m; path = BCCoreData/BCCoreData.m; sourceTree = "<group>"; };
+		A30ACCF3195AAB890058C3BD /* BCDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCDataHelper.h; path = BCCoreData/BCDataHelper.h; sourceTree = "<group>"; };
+		A30ACCF4195AAB890058C3BD /* BCDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCDataHelper.m; path = BCCoreData/BCDataHelper.m; sourceTree = "<group>"; };
+		A30ACCF7195AAB9D0058C3BD /* BarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarChart.h; path = BarChart/BarChart.h; sourceTree = "<group>"; };
+		A30ACCF8195AAB9D0058C3BD /* BarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarChart.m; path = BarChart/BarChart.m; sourceTree = "<group>"; };
+		A30ACCF9195AAB9D0058C3BD /* BarChartBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarChartBar.h; path = BarChart/BarChartBar.h; sourceTree = "<group>"; };
+		A30ACCFA195AAB9D0058C3BD /* BarChartBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarChartBar.m; path = BarChart/BarChartBar.m; sourceTree = "<group>"; };
+		A30ACCFB195AAB9D0058C3BD /* BarChartGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarChartGrid.h; path = BarChart/BarChartGrid.h; sourceTree = "<group>"; };
+		A30ACCFC195AAB9D0058C3BD /* BarChartGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarChartGrid.m; path = BarChart/BarChartGrid.m; sourceTree = "<group>"; };
+		A30ACD06195AAC030058C3BD /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Product.h; path = BCData/Product.h; sourceTree = "<group>"; };
+		A30ACD07195AAC030058C3BD /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Product.m; path = BCData/Product.m; sourceTree = "<group>"; };
+		A30ACD08195AAC030058C3BD /* Sales.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sales.h; path = BCData/Sales.h; sourceTree = "<group>"; };
+		A30ACD09195AAC030058C3BD /* Sales.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sales.m; path = BCData/Sales.m; sourceTree = "<group>"; };
 		A32A0ECF1959203300287B2E /* BarChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A32A0ED21959203300287B2E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A32A0ED41959203300287B2E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,15 +106,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A30ACCE1195AA9B40058C3BD /* BCCoreData */ = {
+		A30ACCD4195AA1450058C3BD /* BarChart */ = {
 			isa = PBXGroup;
 			children = (
-				A30ACCE2195AA9B40058C3BD /* BCCoreData.h */,
-				A30ACCE3195AA9B40058C3BD /* BCCoreData.m */,
-				A30ACCE6195AA9B40058C3BD /* BCDataHelper.h */,
-				A30ACCE7195AA9B40058C3BD /* BCDataHelper.m */,
+				A30ACCF7195AAB9D0058C3BD /* BarChart.h */,
+				A30ACCF8195AAB9D0058C3BD /* BarChart.m */,
+				A30ACCF9195AAB9D0058C3BD /* BarChartBar.h */,
+				A30ACCFA195AAB9D0058C3BD /* BarChartBar.m */,
+				A30ACCFB195AAB9D0058C3BD /* BarChartGrid.h */,
+				A30ACCFC195AAB9D0058C3BD /* BarChartGrid.m */,
 			);
-			path = BCCoreData;
+			name = BarChart;
 			sourceTree = "<group>";
 		};
 		A32A0EC61959203300287B2E = {
@@ -147,8 +158,9 @@
 				A32A0EE41959203300287B2E /* Main.storyboard */,
 				A32A0EE71959203300287B2E /* BCViewController.h */,
 				A32A0EE81959203300287B2E /* BCViewController.m */,
-				A30ACCE1195AA9B40058C3BD /* BCCoreData */,
-				A3668B2E1959C73A0053D325 /* BarChartData */,
+				A3668B2F1959C76E0053D325 /* BCCoreData */,
+				A3668B2E1959C73A0053D325 /* BCData */,
+				A30ACCD4195AA1450058C3BD /* BarChart */,
 				A32A0EEA1959203300287B2E /* Images.xcassets */,
 				A32A0ED91959203300287B2E /* Supporting Files */,
 			);
@@ -158,7 +170,7 @@
 		A32A0ED91959203300287B2E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A30ACCCE195A640A0058C3BD /* Utility.h */,
+				A30ACCD3195A9D9F0058C3BD /* Utility.h */,
 				A32A0EDA1959203300287B2E /* BarChart-Info.plist */,
 				A32A0EDB1959203300287B2E /* InfoPlist.strings */,
 				A32A0EDE1959203300287B2E /* main.m */,
@@ -185,16 +197,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A3668B2E1959C73A0053D325 /* BarChartData */ = {
+		A3668B2E1959C73A0053D325 /* BCData */ = {
 			isa = PBXGroup;
 			children = (
-				A30ACCEB195AA9E30058C3BD /* Product.h */,
-				A30ACCEC195AA9E30058C3BD /* Product.m */,
-				A30ACCED195AA9E30058C3BD /* Sales.h */,
-				A30ACCEE195AA9E30058C3BD /* Sales.m */,
+				A30ACD06195AAC030058C3BD /* Product.h */,
+				A30ACD07195AAC030058C3BD /* Product.m */,
+				A30ACD08195AAC030058C3BD /* Sales.h */,
+				A30ACD09195AAC030058C3BD /* Sales.m */,
 				A3668B221959B9720053D325 /* BarChart.xcdatamodeld */,
 			);
-			name = BarChartData;
+			name = BCData;
+			sourceTree = "<group>";
+		};
+		A3668B2F1959C76E0053D325 /* BCCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A30ACCF1195AAB890058C3BD /* BCCoreData.h */,
+				A30ACCF2195AAB890058C3BD /* BCCoreData.m */,
+				A30ACCF3195AAB890058C3BD /* BCDataHelper.h */,
+				A30ACCF4195AAB890058C3BD /* BCDataHelper.m */,
+			);
+			name = BCCoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,14 +318,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A30ACCF0195AA9E30058C3BD /* Sales.m in Sources */,
-				A30ACCE8195AA9B40058C3BD /* BCCoreData.m in Sources */,
+				A30ACD0B195AAC030058C3BD /* Sales.m in Sources */,
 				A3668B241959B9720053D325 /* BarChart.xcdatamodeld in Sources */,
-				A30ACCEA195AA9B40058C3BD /* BCDataHelper.m in Sources */,
 				A32A0EE91959203300287B2E /* BCViewController.m in Sources */,
-				A30ACCEF195AA9E30058C3BD /* Product.m in Sources */,
+				A30ACCFF195AAB9D0058C3BD /* BarChartGrid.m in Sources */,
 				A32A0EDF1959203300287B2E /* main.m in Sources */,
+				A30ACCF6195AAB890058C3BD /* BCDataHelper.m in Sources */,
+				A30ACCFD195AAB9D0058C3BD /* BarChart.m in Sources */,
 				A32A0EE31959203300287B2E /* BCAppDelegate.m in Sources */,
+				A30ACD0A195AAC030058C3BD /* Product.m in Sources */,
+				A30ACCFE195AAB9D0058C3BD /* BarChartBar.m in Sources */,
+				A30ACCF5195AAB890058C3BD /* BCCoreData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

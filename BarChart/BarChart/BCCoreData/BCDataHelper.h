@@ -7,9 +7,10 @@
 //
 
 #import "BCCoreData.h"
+#import "Product.h"
+#import "Sales.h"
 
-@interface BCDataHelper:NSObject<NSFetchedResultsControllerDelegate>
-
+@interface BCDataHelper : NSObject
 
 + (NSArray *)ArrayEntitiesWithClassName:(NSString *)className
                         sortDescriptors:(NSArray *)sortDescriptors
@@ -21,5 +22,8 @@
                                            sortDescriptors:(NSArray *)sortDescriptors
                                         sectionNameKeyPath:(NSString *)sectionNameKeypath
                                                  predicate:(NSPredicate *)predicate;
+
+
+- (void)initializeChartData;
 
 @end

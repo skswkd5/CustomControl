@@ -15,7 +15,6 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-
 #pragma mark - CoreData
 + (BCCoreData *)sharedInstance
 {
@@ -34,71 +33,12 @@
 {
     if(self = [super init])
     {
-        [self managedObjectContext];
         [self managedObjectModel];
+        [self managedObjectContext];
         [self persistentStoreCoordinator];
-
     }
     return self;
 }
-
-#pragma mark - initializingChartData
-- (void)saveProductData
-{
-    NSArray *displayName = @[@"ChatOn", @"KaKaoTalk", @"FaceBook", @"Twitter", @"Instagram", @"MyPeople", @"Band", @"Line"];
-    //@[@"챗온", @"카카오톡", @"페이스북", @"트위터", @"인스타그램", @"마플", @"밴드", @"라인"];
-    NSArray *modelName = @[@"ChatOn", @"KaKaoTalk", @"FaceBook", @"Twitter", @"Instagram", @"MyPeople", @"Band", @"Line"];
-    
-//    Product *dataProduct = nil;
-//    
-//    for(int i = 0; i < displayName.count; i++)
-//    {
-//        dataProduct = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_PRODUCT
-//                                                    inManagedObjectContext:self.managedObjectContext];
-//        dataProduct.displayName = displayName[i];// [displayName objectAtIndex:i];
-//        dataProduct.model = modelName[i];
-//        dataProduct.releaseDate = [NSDate date];
-//      
-//        [self saveContext];
-//    }
-    
-}
-
-- (NSSet *)returnInitialSalesData
-{
-    NSMutableArray *arrReturn = [[NSMutableArray alloc] init];
-    
-    NSInteger maxCount = random() % 500;
-    
-    for(int i=0; i< maxCount; i++)
-    {
-        NSInteger count = random() % 1000;
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-mm-dd"];
-        
-        NSDate *startDay = [formatter dateFromString:@"2014-01-01"];
-        
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSCalendarUnit unitFlags =  NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-        NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:startDay];
-        
-        int r = arc4random() % 364;
-        [dateComponents setDay:r];
-        NSDate *newDate = [calendar dateFromComponents:dateComponents];
-        NSLog(@"i: %d = count/newDate: %d/%@",i, count, newDate);
-        
-        NSDictionary *dic = @{@"count": [NSNumber numberWithInt:count], @"date": newDate};
-        [arrReturn addObject:dic];
-        
-    }
-    
-    NSSet *returnSet = [[NSSet alloc] initWithArray:arrReturn];
-    
-    return returnSet;
-    
-}
-
 
 #pragma mark -bcCoreData
 -(void)saveContext
@@ -148,6 +88,7 @@
                                                    inDomains:NSUserDomainMask]
             lastObject];
 }
+
 
 
 #pragma mark - property
