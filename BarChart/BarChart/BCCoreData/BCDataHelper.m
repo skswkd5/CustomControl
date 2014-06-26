@@ -30,7 +30,6 @@
     NSLog(@"\nNSFetchedResultsController Reqeust\nClassName : %@\nssortDescriptors : %@\nsectionNameKeyPath : %@\npredicate : %@",className,sortDescriptors,sectionNameKeypath,predicate);
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
     NSEntityDescription *entity = [NSEntityDescription entityForName:className inManagedObjectContext:[[BCCoreData sharedInstance] managedObjectContext]];
     
     [fetchRequest setEntity:entity];

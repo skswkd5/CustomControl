@@ -7,8 +7,11 @@
 //
 
 #import "BCViewController.h"
+#import "Utility.h"
 
 @interface BCViewController ()
+
+@property (retain, nonatomic) NSDictionary *dicBCData;
 
 @end
 
@@ -17,8 +20,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //초기화 하기
 	[self initializeCoreData];
+    
+    //데이터 가져오기
+    self.dicBCData = [self getBarChartData];
+
+    //Chart Setting
     [self setBarChart];
+    
+    
+    barChart.ChartData = self.dicBCData;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -27,6 +41,68 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - prepare data for a bar chart
+- (NSDictionary *)getBarChartData
+{
+    NSArray *arrSales = [self getDataForThisYear];
+    NSDictionary *dicData = [self setSalesData:arrSales];
+    
+    return dicData;
+    
+}
+
+- (NSDictionary *)setSalesData:(NSArray *)arr
+{
+    NSMutableDictionary *dicData = [[NSMutableDictionary alloc] init];
+    
+    if (arr.count >0)
+    {
+        for (Sales *sales in arr)
+        {
+            NSLog(@" sales count: %@, date: %@", sales.count, sales.date);
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSDateComponents *components = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:sales.date];
+
+            NSString *month = [NSString stringWithFormat:@"%ld", [components month]];
+            if(![dicData objectForKey:month])
+            {
+                [dicData setObject:sales.count forKey:month];
+            }
+            else
+            {
+                NSNumber *count = [dicData objectForKey:month];
+                [dicData setObject:@([count integerValue] + [sales.count integerValue]) forKey:month];
+            }
+            NSLog(@"dicData: %@", dicData);
+        }
+    }
+    
+    return dicData;
+}
+
+- (NSArray *)getDataForThisYear
+{
+    //올해 데이터를 가져온다
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
+    [components setDay:1];
+    [components setMonth:1];
+    NSDate *firstDay = [calendar dateFromComponents:components];
+    
+    components = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
+    [components setDay:12];
+    [components setMonth:31];
+    NSDate *lastDay = [calendar dateFromComponents:components];
+    
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(date >= %@) and (date <= %@)", firstDay, lastDay];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
+    NSArray *arrData = [BCDataHelper ArrayEntitiesWithClassName:ENTITY_SALES sortDescriptors:@[sort] sectionNameKeyPath:nil predicate:predicate];
+    
+    return arrData;
+}
+
+
 #pragma mark - setBarChart
 - (void)setBarChart
 {
@@ -34,7 +110,6 @@
     rect.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height;
     
     barChart = [[BarChart alloc] initWithFrame:rect];
-    barChart.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:barChart];
 }
 

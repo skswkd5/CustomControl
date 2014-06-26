@@ -21,4 +21,14 @@
 @property (assign, nonatomic) NSInteger yLabelWidth;
 @property (assign, nonatomic) NSInteger XLabelHeight;
 
+@property (assign, nonatomic) NSDictionary *ChartData;
+@property (assign, nonatomic) NSNumber *maxValueForY;
+
+@property (assign, nonatomic) BOOL yTitleHidden;
+@property (assign, nonatomic) BOOL xTitleHidden;
+@property (assign, nonatomic) BOOL gridHidden;
+
+@property (assign, nonatomic) UIColor *CanvasColor;
+
+
 @end
