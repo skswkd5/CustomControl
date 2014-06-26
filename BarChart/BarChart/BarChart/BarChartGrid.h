@@ -9,7 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface BarChartGrid : UIView
+{
+    CGFloat canvasWidth;
+    CGFloat canvasHeight;
+    NSMutableArray *arrRectForBars;
+    
+}
 
+@property (assign, nonatomic) BOOL gridHidden;
+@property (assign, nonatomic) UIColor *CanvasColor;
 
+@property (assign, nonatomic) NSInteger CountBars;
 
+- (void)addChartBar:(NSInteger)idx Value:(NSNumber *)value;
 @end

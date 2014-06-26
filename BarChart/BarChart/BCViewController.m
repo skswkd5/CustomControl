@@ -30,9 +30,6 @@
     //Chart Setting
     [self setBarChart];
     
-    
-    barChart.ChartData = self.dicBCData;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +37,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - setBarChart
+- (void)setBarChart
+{
+    CGRect rect = [UIScreen mainScreen].bounds;
+    CGFloat statusBar = [UIApplication sharedApplication].statusBarFrame.size.height;
+    rect.origin.y = statusBar;
+    rect.size.height -= statusBar;
+    
+    barChart = [[BarChart alloc] initWithFrame:rect];
+    //설정값을 세팅한 후 view에 add한다
+    barChart.ChartData = self.dicBCData;
+    barChart.gridHidden = YES;
+    
+    
+    
+    [self.view addSubview:barChart];
+}
+
 
 #pragma mark - prepare data for a bar chart
 - (NSDictionary *)getBarChartData
@@ -59,7 +75,6 @@
     {
         for (Sales *sales in arr)
         {
-            NSLog(@" sales count: %@, date: %@", sales.count, sales.date);
             NSCalendar *calendar = [NSCalendar currentCalendar];
             NSDateComponents *components = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:sales.date];
 
@@ -73,7 +88,6 @@
                 NSNumber *count = [dicData objectForKey:month];
                 [dicData setObject:@([count integerValue] + [sales.count integerValue]) forKey:month];
             }
-            NSLog(@"dicData: %@", dicData);
         }
     }
     
@@ -100,17 +114,6 @@
     NSArray *arrData = [BCDataHelper ArrayEntitiesWithClassName:ENTITY_SALES sortDescriptors:@[sort] sectionNameKeyPath:nil predicate:predicate];
     
     return arrData;
-}
-
-
-#pragma mark - setBarChart
-- (void)setBarChart
-{
-    CGRect rect = [UIScreen mainScreen].bounds;
-    rect.origin.y = [UIApplication sharedApplication].statusBarFrame.size.height;
-    
-    barChart = [[BarChart alloc] initWithFrame:rect];
-    [self.view addSubview:barChart];
 }
 
 #pragma mark - initializing CoreData

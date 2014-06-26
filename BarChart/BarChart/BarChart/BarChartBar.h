@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BarChartBar : UIControl
+typedef enum
+{
+	BarValueTextOnTop,      //bar 위에
+    BarValueTextOnMiddle,   //중간에
+    barValueTextNone        //보이지 않음
+} BarValueText;
+
+@interface BarChartBar : UIView
+
+@property (assign, nonatomic) UIColor *color;
+@property (assign, nonatomic) NSString *value;
+@property (assign, nonatomic) BarValueText barValueText;
+
 
 @end
