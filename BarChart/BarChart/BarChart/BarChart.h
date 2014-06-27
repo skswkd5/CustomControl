@@ -31,5 +31,7 @@
 @property (assign, nonatomic) UIColor *CanvasColor;
 
 
+- (id)initWithFrame:(CGRect)frame DataSource:(NSDictionary *)chartData;
+
 
 @end

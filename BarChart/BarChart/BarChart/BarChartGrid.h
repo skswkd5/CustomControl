@@ -21,5 +21,5 @@
 
 @property (assign, nonatomic) NSInteger CountBars;
 
-- (void)addChartBar:(NSInteger)idx Value:(NSNumber *)value;
+- (void)drawCharBars;
 @end

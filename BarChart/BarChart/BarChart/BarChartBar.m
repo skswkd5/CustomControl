@@ -19,13 +19,29 @@
     return self;
 }
 
-/*
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 1.0f);
+    
+    CGColorRef color = [self getRandomColor].CGColor;
+    CGContextSetFillColorWithColor(context, color);
+    CGContextFillRect(context, rect);
 }
-*/
+
+
+- (UIColor *)getRandomColor
+{
+    NSInteger red = arc4random()%255;
+    NSInteger green = arc4random()%255;
+    NSInteger blue = arc4random()%255;
+    
+    UIColor *randColor = [UIColor colorWithRed:red/255.0f green:green/255.0f blue:blue/255.0f alpha:1.0f];
+    
+    return randColor;
+}
 
 @end

@@ -10,14 +10,17 @@
 #import "BarChartGrid.h"
 #import "BarChartBar.h"
 
+
 static const NSInteger kDefaultWidthForYTitle = 20;
 static const NSInteger kDefaultHeightForXTitle = 20;
 
-static const NSInteger kDefaultWidthForYLabel = 20;
+static const NSInteger kDefaultWidthForYLabel = 30;
 static const NSInteger kDefaultHeightForXLabel = 20;
 
 static const NSInteger kTagForTitleLabel = 200;
 static const NSInteger kTagForValueLabel = 100;
+
+static const NSInteger kNumberOfYLabel = 6;
 
 @interface BarChart()
 {
@@ -42,7 +45,16 @@ static const NSInteger kTagForValueLabel = 100;
     self = [super initWithFrame:frame];
     if (self) {
         [self initializingValues];
-//        [self initializingViews];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame DataSource:(NSDictionary *)chartData
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.ChartData = chartData;
+        [self initializingValues];
     }
     return self;
 }
@@ -50,56 +62,20 @@ static const NSInteger kTagForValueLabel = 100;
 #pragma mark - Initializing
 - (void)initializingValues
 {
-    self.gridHidden = YES;
+//    self.gridHidden = YES;
     
-    self.viewYTitle.hidden = YES;
-    self.viewYLabel.hidden = YES;
-    self.viewXTitle.hidden = YES;
-    self.viewXLabel.hidden = YES;
-    self.viewCanvas.hidden = YES;
+//    self.viewYTitle.hidden = YES;
+//    self.viewYLabel.hidden = YES;
+//    self.viewXTitle.hidden = YES;
+//    self.viewXLabel.hidden = YES;
+//    self.viewCanvas.hidden = YES;
     
     maxValue = 0;
     minValue = 0;
     countBars = 0;
-
-}
-
-
-
-
-#pragma mark - Default Layout
-- (void)layoutSubviews
-{
     
     [self manageChartData];
     
-    if ([self.subviews count] == 0)
-    {
-        [self addSubviews];
-    }
-    
-    self.viewYTitle.frame = [self setRectForYTitleView];
-    self.viewYLabel.frame = [self setRectForYLabelView];
-    self.viewXTitle.frame = [self setRectForXTitleView];
-    self.viewXLabel.frame = [self setRectForXLabelView];
-    self.viewCanvas.frame = [self setRectForCanvasView];
-    
-  
-    [self setBars];
-    
-
-}
-- (void)setBars
-{
-    if (self.ChartData.count == 0)
-        return;
-    
-    NSInteger idx = 0;
-    for (NSNumber *count in self.ChartData)
-    {
-        [self.viewCanvas addChartBar:idx Value:count];
-        idx ++;
-    }
 }
 
 - (void)manageChartData
@@ -110,14 +86,38 @@ static const NSInteger kTagForValueLabel = 100;
     }
     //TODO: 1월 부터 12월로 데이터 정렬하기
     NSArray *keys = [self.ChartData allValues];
+//    NSArray* sortedArray = [keys sortedArrayUsingComparator:^(id a, id b) {
+//        return [a compare:b options:NSNumericSearch];
+//    }];
+    
+//    NSLog(@"sortedArray: %@", sortedArray);
+    
     countBars = keys.count;
     for(NSNumber *count in keys)
     {
         maxValue = MAX([count integerValue], maxValue);
         minValue = MIN([count integerValue], minValue);
     }
-    
 }
+
+
+
+#pragma mark - Default Layout
+- (void)layoutSubviews
+{
+    if ([self.subviews count] == 0)
+    {
+        [self addSubviews];
+    }
+    
+    self.viewYTitle.frame = [self setRectForYTitleView];
+    self.viewYLabel.frame = [self setRectForYLabelView];
+    self.viewXTitle.frame = [self setRectForXTitleView];
+    self.viewXLabel.frame = [self setRectForXLabelView];
+    self.viewCanvas.frame = [self setRectForCanvasView];
+
+}
+
 
 - (void)addSubviews
 {
@@ -127,6 +127,7 @@ static const NSInteger kTagForValueLabel = 100;
     
     //Y축 데이터 Label
     self.viewYLabel = [[UIView alloc] initWithFrame:[self setRectForYLabelView]];
+    [self addYLabelSubView];
     
     //X축 타이틀
     self.viewXTitle = [[UIView alloc] initWithFrame:[self setRectForXTitleView]];
@@ -134,6 +135,7 @@ static const NSInteger kTagForValueLabel = 100;
     
     //X축 데이터 Label
     self.viewXLabel = [[UIView alloc] initWithFrame:[self setRectForXLabelView]];
+    [self addXLabelSubView];
     
     //Canvas
     self.viewCanvas = [[BarChartGrid alloc] initWithFrame:[self setRectForCanvasView]];
@@ -147,7 +149,72 @@ static const NSInteger kTagForValueLabel = 100;
     [self addSubview:self.viewXLabel];
     
     [self addSubview:self.viewCanvas];
+
     
+}
+
+- (void)addXLabelSubView
+{
+    if(countBars != 0)
+    {
+        CGFloat width =  round(self.viewXLabel.bounds.size.width / countBars);
+        
+        for (int i = 1; i <= countBars; i ++)
+        {
+            CGRect rect = self.viewXLabel.bounds;
+            rect.size.width = width;
+            if (i > 1)
+            {
+                rect.origin.x = width * (i - 1);
+            }
+            
+            UILabel * lbl = [[UILabel alloc] initWithFrame:rect];
+            lbl.tag = kTagForValueLabel + i;
+            lbl.font = [UIFont systemFontOfSize:10];
+            lbl.textColor = [UIColor blackColor];
+            lbl.textAlignment = NSTextAlignmentCenter;
+            
+            NSArray *arr = [self.ChartData allKeys];
+            NSString *lblValue = [arr objectAtIndex:(i-1)];
+            
+            lbl.text = lblValue;
+            
+            [self.viewXLabel addSubview: lbl];
+        }
+    }
+}
+
+- (void)addYLabelSubView
+{
+    if(maxValue != 0)
+    {
+        NSInteger topValue = maxValue + ( maxValue * 0.10);
+        NSInteger interval = topValue / kNumberOfYLabel ;
+        CGFloat height =  round(self.viewYLabel.bounds.size.height / kNumberOfYLabel);
+        
+        for (int i = 1; i <= kNumberOfYLabel; i ++)
+        {
+            CGRect rect = self.viewYLabel.bounds;
+            rect.size.height = height;
+            rect.origin.y = self.viewYLabel.bounds.size.height - (height * i);
+            
+            UILabel * lbl = [[UILabel alloc] initWithFrame:rect];
+            lbl.tag = kTagForValueLabel + i;
+            lbl.font = [UIFont systemFontOfSize:10];
+            lbl.textColor = [UIColor blackColor];
+            lbl.textAlignment = NSTextAlignmentCenter;
+            NSInteger lblValue = 0;
+            
+            if(i > 1)
+            {
+                lblValue = interval * (i -1);
+            }
+            
+            lbl.text = [NSString stringWithFormat:@"%ld", (long)lblValue];
+            
+            [self.viewYLabel addSubview: lbl];
+        }
+    }
 }
 
 - (UILabel *)setLabelForTitle:(CGRect)rect
@@ -157,7 +224,8 @@ static const NSInteger kTagForValueLabel = 100;
     lbl.font = [UIFont systemFontOfSize:12];
     lbl.textColor = [UIColor colorWithRed:161/255.0 green:174/255.0 blue:200/255.0 alpha:1];
     lbl.text = @"Default";
-    lbl.textAlignment = NSTextAlignmentCenter;
+//    lbl.transform = CGAffineTransformMakeRotation((M_PI / 45.0));
+//    lbl.textAlignment = NSTextAlignmentCenter;
     
     return lbl;
 }
@@ -180,7 +248,7 @@ static const NSInteger kTagForValueLabel = 100;
             //만약 따로 설정해주지 않았다면 Default 값을 가진다.
             self.yTitleWidth = kDefaultWidthForYTitle;
         }
-        rect.size.height = self.yTitleWidth;
+        rect.size.width = self.yTitleWidth;
     }
     return rect;
 }
@@ -199,8 +267,10 @@ static const NSInteger kTagForValueLabel = 100;
         {
             self.yLabelWidth = kDefaultWidthForYLabel;
         }
-        rect.origin.y = self.viewYTitle.frame.origin.y + self.viewYTitle.frame.size.height;
-        rect.size.height = self.yLabelWidth;
+    
+        rect.origin.x = self.viewYTitle.frame.size.width;
+        rect.size.width = self.yLabelWidth;
+        rect.size.height -= (self.viewXTitle.frame.size.height);
         
     }
     return rect;
@@ -219,8 +289,10 @@ static const NSInteger kTagForValueLabel = 100;
         {
             self.xTitleHeight = kDefaultHeightForXTitle;
         }
-        rect.size.width = self.xTitleHeight;
+        rect.origin.y = self.bounds.size.height - self.xTitleHeight;
+        rect.size.height = self.xTitleHeight;
     }
+    
     return rect;
 }
 
@@ -237,8 +309,11 @@ static const NSInteger kTagForValueLabel = 100;
         {
             self.XLabelHeight = kDefaultHeightForXLabel;
         }
-        rect.origin.x = self.viewXTitle.frame.size.width;
-        rect.size.width = self.XLabelHeight;
+        rect.origin.y = self.bounds.size.height - self.viewXTitle.bounds.size.height - self.XLabelHeight;
+        rect.origin.x = self.viewYTitle.frame.size.width + self.viewYLabel.frame.size.width;
+        
+        rect.size.width = self.bounds.size.width - rect.origin.x;
+        rect.size.height = self.XLabelHeight;
     }
     return rect;
 }
@@ -247,11 +322,10 @@ static const NSInteger kTagForValueLabel = 100;
 {
     CGRect rect = self.frame;
     
-    rect.origin.x = self.viewXTitle.frame.size.width + self.viewXLabel.frame.size.width;
-    rect.origin.y = self.viewYTitle.frame.size.height + self.viewYLabel.frame.size.height;
+    rect.origin.x = self.viewYTitle.frame.size.width + self.viewYLabel.frame.size.width;
     
     rect.size.width = self.bounds.size.width - rect.origin.x;
-    rect.size.height = self.bounds.size.height - rect.origin.y;
+    rect.size.height = self.bounds.size.height - (self.viewXTitle.frame.size.height + self.viewXLabel.frame.size.height) - rect.origin.y;
     
     return rect;
 }

@@ -41,18 +41,15 @@
 #pragma mark - setBarChart
 - (void)setBarChart
 {
-    CGRect rect = [UIScreen mainScreen].bounds;
-    CGFloat statusBar = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGRect main = [UIScreen mainScreen].bounds;
+    CGRect rect = main;
+    CGFloat statusBar = 20;
+    rect.size.height = main.size.width;
+    rect.size.width = main.size.height;
     rect.origin.y = statusBar;
     rect.size.height -= statusBar;
     
-    barChart = [[BarChart alloc] initWithFrame:rect];
-    //설정값을 세팅한 후 view에 add한다
-    barChart.ChartData = self.dicBCData;
-    barChart.gridHidden = YES;
-    
-    
-    
+    barChart = [[BarChart alloc] initWithFrame:rect DataSource:self.dicBCData];
     [self.view addSubview:barChart];
 }
 
@@ -71,7 +68,7 @@
 {
     NSMutableDictionary *dicData = [[NSMutableDictionary alloc] init];
     
-    if (arr.count >0)
+    if (arr.count > 0)
     {
         for (Sales *sales in arr)
         {
@@ -96,7 +93,6 @@
 
 - (NSArray *)getDataForThisYear
 {
-    //올해 데이터를 가져온다
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSYearCalendarUnit fromDate:[NSDate date]];
     [components setDay:1];
