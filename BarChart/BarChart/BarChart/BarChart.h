@@ -32,6 +32,6 @@
 
 
 - (id)initWithFrame:(CGRect)frame DataSource:(NSDictionary *)chartData;
-
+- (void)startAnimation;
 
 @end

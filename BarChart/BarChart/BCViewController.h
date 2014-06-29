@@ -15,7 +15,6 @@
 {
     BCDataHelper *dataHelper;
     BarChart *barChart;
-    
 }
 
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;

@@ -16,10 +16,14 @@ typedef enum
 } BarValueText;
 
 @interface BarChartBar : UIView
+{
+    NSString *strValue;
+}
 
 @property (assign, nonatomic) UIColor *color;
-@property (assign, nonatomic) NSString *value;
 @property (assign, nonatomic) BarValueText barValueText;
 
+- (id)initWithFrame:(CGRect)frame Value:(NSString *) value;
+- (void)startAnimation;
 
 @end

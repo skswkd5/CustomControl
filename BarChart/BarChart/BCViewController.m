@@ -29,7 +29,11 @@
 
     //Chart Setting
     [self setBarChart];
-    
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    //애니메이션 시작 하기
+    [barChart startAnimation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,11 +58,19 @@
 }
 
 
-#pragma mark - prepare data for a bar chart
+#pragma mark - to prepare data for a bar chart
 - (NSDictionary *)getBarChartData
 {
     NSArray *arrSales = [self getDataForThisYear];
     NSDictionary *dicData = [self setSalesData:arrSales];
+    
+    //TODO: 1월 부터 12월로 데이터 정렬하기
+//    NSArray *keys = [dicData allValues];
+    //    NSArray* sortedArray = [keys sortedArrayUsingComparator:^(id a, id b) {
+    //        return [a compare:b options:NSNumericSearch];
+    //    }];
+    
+    //    NSLog(@"sortedArray: %@", sortedArray);
     
     return dicData;
     

@@ -12,14 +12,21 @@
 {
     CGFloat canvasWidth;
     CGFloat canvasHeight;
-    NSMutableArray *arrRectForBars;
     
+    //시작점
+    CGFloat originX;
+    CGFloat originY;
+   
+    //끝점
+    CGFloat endX;
+    CGFloat endY;
 }
 
-@property (assign, nonatomic) BOOL gridHidden;
+@property (assign, nonatomic) BOOL xGridHidden;
+@property (assign, nonatomic) BOOL yGridHidden;
+
 @property (assign, nonatomic) UIColor *CanvasColor;
 
 @property (assign, nonatomic) NSInteger CountBars;
 
-- (void)drawCharBars;
 @end
