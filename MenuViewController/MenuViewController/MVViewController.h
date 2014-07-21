@@ -1,5 +1,5 @@
 //
-//  MVAppDelegate.h
+//  MVViewController.h
 //  MenuViewController
 //
 //  Created by Jeesun Kim on 2014. 6. 30..
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MVAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface MVViewController : UIViewController <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end

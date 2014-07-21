@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7C34D0E5-9DD9-4978-94FD-F4477D02A24D</string>
+	<string>684F8046-E899-4679-9FD2-35D3F34835B2</string>
 	<key>IDESourceControlProjectName</key>
 	<string>BarChart</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3F5FDDCC-DE92-4448-963B-4009337E27E9</key>
+		<key>B0B76F3E-93D2-4411-87D5-11AF1549A5CF</key>
 		<string>https://github.com/skswkd5/CustomControl.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BarChart/BarChart.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3F5FDDCC-DE92-4448-963B-4009337E27E9</key>
+		<key>B0B76F3E-93D2-4411-87D5-11AF1549A5CF</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3F5FDDCC-DE92-4448-963B-4009337E27E9</string>
+	<string>B0B76F3E-93D2-4411-87D5-11AF1549A5CF</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3F5FDDCC-DE92-4448-963B-4009337E27E9</string>
+			<string>B0B76F3E-93D2-4411-87D5-11AF1549A5CF</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CustomControl</string>
 		</dict>
