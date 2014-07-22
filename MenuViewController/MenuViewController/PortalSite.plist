@@ -5,6 +5,7 @@
 	<key>SiteName</key>
 	<array>
 		<string>The Huffington Post</string>
+		<string>Google</string>
 		<string>Daum</string>
 		<string>Naver</string>
 		<string>Nate</string>
@@ -12,6 +13,7 @@
 	<key>url</key>
 	<array>
 		<string>m.huffpost.com/kr</string>
+		<string>www.google.com</string>
 		<string>www.daum.net</string>
 		<string>www.naver.com</string>
 		<string>www.nate.com</string>

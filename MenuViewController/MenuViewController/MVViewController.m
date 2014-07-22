@@ -27,15 +27,12 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIWebView *web;
 
-@property (nonatomic, assign) CGPoint previousPoint;
-@property (nonatomic, assign) CGFloat panGestureSideOffset;
-
 @property (nonatomic, strong) NSDictionary *dicData;
 @end
 
 
 static const NSString *http = @"http://";
-static const NSString *homeURL = @"www.google.com";
+static const NSString *homeURL = @"m.huffpost.com/kr";
 
 @implementation MVViewController
 
@@ -49,6 +46,14 @@ static const NSInteger kDefaultLeftViewMargin = 50;
 
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - local functions
+
 - (void)initializingControllers
 {
     
@@ -59,18 +64,18 @@ static const NSInteger kDefaultLeftViewMargin = 50;
     
     [self.navigationItem.leftBarButtonItem setAction:@selector(pressedLeftButton)];
     [self.navigationItem.rightBarButtonItem setAction:@selector(goHomeWeb)];
-
+    
     self.panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     self.panRecognizer.delegate = self;
+    self.panRecognizer.maximumNumberOfTouches = 1;
     [self.view addGestureRecognizer:self.panRecognizer];
-    self.panGestureSideOffset = 0;
-
+    
     _xPosStart = 0;
     _xPosLastSample = 0;
     _xPosCurrent = 0;
     _xPosEnd = 0;
     _direction = 0;
-
+    
     isShowLeftMenu = NO;
     
     [self initWebView];
@@ -88,7 +93,7 @@ static const NSInteger kDefaultLeftViewMargin = 50;
     
     self.web = [[UIWebView alloc] initWithFrame:rect];
     [self.view addSubview:self.web];
-
+    
     [self loadWebView:homeURL];
 }
 
@@ -110,6 +115,7 @@ static const NSInteger kDefaultLeftViewMargin = 50;
     
     self.tableView = [[UITableView alloc] initWithFrame:_rectTableWiew];
     [self.view addSubview:self.tableView];
+    self.tableView.backgroundColor = [UIColor darkGrayColor];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -129,16 +135,16 @@ static const NSInteger kDefaultLeftViewMargin = 50;
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - pan Gesture
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    return YES;
+    
+    if(![otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+    {
+        otherGestureRecognizer.enabled = YES;
+    }
+    
+    return NO;
 }
 
 
@@ -357,6 +363,8 @@ static const NSInteger kDefaultLeftViewMargin = 50;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
+    cell.backgroundColor = [UIColor clearColor];
+    
     NSArray *arr = [self.dicData objectForKey:@"SiteName"];
     NSInteger i = indexPath.row;
     NSString *str = arr[i];
@@ -366,6 +374,22 @@ static const NSInteger kDefaultLeftViewMargin = 50;
     return cell;
     
 }
+
+#pragma mark - Orientation
+- (BOOL)shouldAutorotate
+{
+    NSLog(@"%s", __FUNCTION__);
+    
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    NSLog(@"%s", __FUNCTION__);
+    
+    return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight ;
+}
+
 
 
 
